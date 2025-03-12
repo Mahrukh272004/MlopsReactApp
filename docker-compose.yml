@@ -1,0 +1,17 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend/frontend # Path to the frontend Dockerfile
+    ports:
+      - "3000:3000" # Map port 3000 for the frontend
+    depends_on:
+      - backend # Ensure backend starts before frontend
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:5050 # Use backend service name for internal communication
+
+  backend:
+    build: ./backend # Path to the backend Dockerfile
+    ports:
+      - "5050:5050" # Map port 5050 for the backend
+    environment:
+      - MONGO_URI=mongodb+srv://wahidimahrukh:123@cluster0.ks9iq.mongodb.net/myapp?retryWrites=true&w=majority
